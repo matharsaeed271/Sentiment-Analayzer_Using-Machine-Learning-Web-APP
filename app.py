@@ -5,9 +5,9 @@ import cleantext
 import emoji
 from textblob import TextBlob
 import nltk
-from cleantext import clean
-nltk.download('punkt')
 
+nltk.download('punkt')
+from cleantext import clean
 st.title("Sentiment-Web-Analyzer")
 background_image = '1752066186248.jpg'
 st.image(background_image, use_column_width=True)
