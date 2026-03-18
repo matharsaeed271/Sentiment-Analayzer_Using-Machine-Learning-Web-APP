@@ -3,6 +3,10 @@ import pandas as pd
 import streamlit as st
 import cleantext
 import emoji
+from textblob import TextBlob
+import nltk
+
+nltk.download('punkt')
 
 st.title("Sentiment-Web-Analyzer")
 background_image = '1752066186248.jpg'
