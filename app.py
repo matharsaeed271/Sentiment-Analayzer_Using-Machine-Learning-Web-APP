@@ -7,6 +7,7 @@ from textblob import TextBlob
 import nltk
 
 nltk.download('punkt')
+nltk.download('stopwords')
 from cleantext import clean
 st.title("Sentiment-Web-Analyzer")
 background_image = '1752066186248.jpg'
@@ -33,7 +34,7 @@ with st.expander("Analyze Your Text"):
     pre = st.text_input('Clean Your Text: ')
     if pre:
         st.write(cleantext.clean(pre, clean_all= False, extra_spaces=True ,
-                                 stopwords=True ,lowercase=True ,numbers=True , punct=True))
+                                 stopwords='en' ,lowercase=True ,numbers=True , punct=True))
 
 with st.expander('Analyze Excel files'):
     st.write("_**Note**_ : Your file must contain the column Name'Tweets' that contain the text to be analyzed.")
