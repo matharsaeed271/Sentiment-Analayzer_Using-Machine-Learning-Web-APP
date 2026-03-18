@@ -8,7 +8,7 @@ st.title("Sentiment-Web-Analyzer")
 background_image = 'image.jpg'
 st.image(background_image, use_column_width=True)
 
-st.header("Now Scale Your Thoughts")
+st.header("Scale Your Thoughts")
 
 with st.expander("Analyze Your Text"):
     text = st.text_input("Text here:")
@@ -39,7 +39,6 @@ with st.expander('Analyze Excel files'):
         blob1 = TextBlob(x)
         return blob1.sentiment.polarity
 
-#
     def analyze(x):
         if x >= 0.5:
             return 'Positive'
@@ -48,7 +47,6 @@ with st.expander('Analyze Excel files'):
         else:
             return 'Neutral'
 
-#
     if upl:
         df = pd.read_excels(upl)
         # del df['Unnamed: 0']
