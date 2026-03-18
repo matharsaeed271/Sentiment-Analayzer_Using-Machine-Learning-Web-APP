@@ -5,7 +5,7 @@ import cleantext
 import emoji
 from textblob import TextBlob
 import nltk
-
+from cleantext import clean
 nltk.download('punkt')
 
 st.title("Sentiment-Web-Analyzer")
