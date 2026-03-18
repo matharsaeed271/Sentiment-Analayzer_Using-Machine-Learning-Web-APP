@@ -5,7 +5,7 @@ import cleantext
 import emoji
 
 st.title("Sentiment-Web-Analyzer")
-background_image = 'image.jpg'
+background_image = '1752066186248.jpg'
 st.image(background_image, use_column_width=True)
 
 st.header("Scale Your Thoughts")
