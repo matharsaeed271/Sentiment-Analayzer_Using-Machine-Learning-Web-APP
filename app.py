@@ -10,7 +10,7 @@ nltk.download('punkt')
 nltk.download('stopwords')
 st.title("Sentiment-Web-Analyzer")
 background_image = '1752066186248.jpg'
-st.image(background_image, width=True)
+st.image(background_image, width=200)
 
 st.header("Scale Your Thoughts")
 
