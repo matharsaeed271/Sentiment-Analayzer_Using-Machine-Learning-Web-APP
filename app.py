@@ -9,30 +9,68 @@ import nltk
 import streamlit as st
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 #################################
-analyzer = SentimentIntensityAnalyzer()
+# analyzer = SentimentIntensityAnalyzer()
+
+# text = st.text_input("Enter your text:")
+
+# if text:
+#     score = analyzer.polarity_scores(text)
+    
+#     st.write(score)
+
+# bad_words = ["shut up", "get out", "stupid", "idiot", "fuck", "fucked", "hell", "pig"]
+
+# def custom_sentiment(text):
+#     for word in bad_words:
+#         if word in text.lower():
+#             return "Negative 😡"
+    
+#     score = analyzer.polarity_scores(text)
+    
+#     if score['compound'] < 0:
+#         return "Negative 😡"
+#     elif score['compound'] > 0:
+#         return "Positive 😊"
+#     else:
+#         return "Neutral 😐"
+
+
+from transformers import pipeline
+
+@st.cache_resource
+def load_model():
+    return pipeline("sentiment-analysis")
+
+model = load_model()
 
 text = st.text_input("Enter your text:")
 
 if text:
-    score = analyzer.polarity_scores(text)
-    
-    st.write(score)
+    result = model(text)[0]
 
-bad_words = ["shut up", "get out", "stupid", "idiot", "fuck", "fucked", "hell", "pig"]
+    label = result['label']
+    score = result['score']
 
-def custom_sentiment(text):
-    for word in bad_words:
-        if word in text.lower():
-            return "Negative 😡"
-    
-    score = analyzer.polarity_scores(text)
-    
-    if score['compound'] < 0:
-        return "Negative 😡"
-    elif score['compound'] > 0:
-        return "Positive 😊"
+    # Convert to polarity
+    if label == "POSITIVE":
+        polarity = score
     else:
-        return "Neutral 😐"
+        polarity = -score
+
+    # Subjectivity (approximation)
+    subjectivity = abs(polarity)
+
+    # Speech label
+    if polarity > 0:
+        speech = "Positive 😊"
+    elif polarity < 0:
+        speech = "Negative 😡"
+    else:
+        speech = "Neutral 🤐"
+
+    st.write(f"Polarity : {round(polarity,2)}")
+    st.write(f"{speech} Speech")
+    st.write(f"Subjectivity : {round(subjectivity,2)}")
 ############################################
 nltk.download('punkt')
 nltk.download('stopwords')
