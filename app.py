@@ -34,7 +34,6 @@ from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 #     else:
 #         return "Neutral 😐"
 import transformers
-pip install transformers torch
 from transformers import pipeline
 
 @st.cache_resource
