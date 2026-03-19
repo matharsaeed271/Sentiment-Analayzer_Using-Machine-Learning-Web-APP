@@ -10,7 +10,7 @@ nltk.download('punkt')
 nltk.download('stopwords')
 st.title("Sentiment-Web-Analyzer")
 background_image = '1752066186248.jpg'
-st.image(background_image, width=200)
+st.image(background_image, width=700)
 
 st.header("Scale Your Thoughts")
 
@@ -30,10 +30,17 @@ with st.expander("Analyze Your Text"):
         st.write('Subjectivity', round(blob.sentiment.subjectivity,2))
 
 
-        pre = st.text_input('Clean Your Text: ')
-        if pre:
-            st.write(cleantext.clean(pre, clean_all= False, extra_spaces=True ,
-                                     stopwords=True ,lowercase=True ,numbers=True , punct=True))
+    pre = st.text_input('Clean Your Text: ')
+    if pre:
+        cleaned_text = clean(
+            pre,
+            clean_all=False,
+            extra_spaces=True,
+            stopwords=True,
+            lowercase=True,
+            numbers=True
+        )
+        st.write(cleaned_text)
 
 with st.expander('Analyze Excel files'):
     st.write("_**Note**_ : Your file must contain the column Name'Tweets' that contain the text to be analyzed.")
