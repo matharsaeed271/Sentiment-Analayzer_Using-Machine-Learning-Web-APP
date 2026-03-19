@@ -31,10 +31,10 @@ with st.expander("Analyze Your Text"):
         st.write('Subjectivity', round(blob.sentiment.subjectivity,2))
 
 
-    pre = st.text_input('Clean Your Text: ')
-    if pre:
-        st.write(cleantext.clean(pre, clean_all= False, extra_spaces=True ,
-                                 stopwords='en' ,lowercase=True ,no_numbers=True , no_punct=True))
+        pre = st.text_input('Clean Your Text: ')
+        if pre:
+            st.write(cleantext.clean(pre, clean_all= False, extra_spaces=True ,
+                                     stopwords=True ,lowercase=True ,numbers=True , punct=True))
 
 with st.expander('Analyze Excel files'):
     st.write("_**Note**_ : Your file must contain the column Name'Tweets' that contain the text to be analyzed.")
