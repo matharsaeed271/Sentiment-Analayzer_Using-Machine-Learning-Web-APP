@@ -8,7 +8,6 @@ import nltk
 
 nltk.download('punkt')
 nltk.download('stopwords')
-from cleantext import clean
 st.title("Sentiment-Web-Analyzer")
 background_image = '1752066186248.jpg'
 st.image(background_image, use_column_width=True)
