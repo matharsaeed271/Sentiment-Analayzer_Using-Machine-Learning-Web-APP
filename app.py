@@ -1,7 +1,7 @@
 from textblob import TextBlob
 import pandas as pd
 import streamlit as st
-import cleantext as clean
+from cleantext import clean
 import emoji
 from textblob import TextBlob
 import nltk
@@ -10,7 +10,7 @@ nltk.download('punkt')
 nltk.download('stopwords')
 st.title("Sentiment-Web-Analyzer")
 background_image = '1752066186248.jpg'
-st.image(background_image, use_column_width=True)
+st.image(background_image, width=True)
 
 st.header("Scale Your Thoughts")
 
