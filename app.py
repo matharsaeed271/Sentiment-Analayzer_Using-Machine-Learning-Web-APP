@@ -8,7 +8,7 @@ import nltk
 
 import streamlit as st
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
-
+#################################
 analyzer = SentimentIntensityAnalyzer()
 
 text = st.text_input("Enter your text:")
@@ -18,6 +18,22 @@ if text:
     
     st.write(score)
 
+bad_words = ["shut up", "get out", "stupid", "idiot", "fuck", "fucked", "hell", "pig"]
+
+def custom_sentiment(text):
+    for word in bad_words:
+        if word in text.lower():
+            return "Negative 😡"
+    
+    score = analyzer.polarity_scores(text)
+    
+    if score['compound'] < 0:
+        return "Negative 😡"
+    elif score['compound'] > 0:
+        return "Positive 😊"
+    else:
+        return "Neutral 😐"
+############################################
 nltk.download('punkt')
 nltk.download('stopwords')
 st.title("Sentiment-Web-Analyzer")
