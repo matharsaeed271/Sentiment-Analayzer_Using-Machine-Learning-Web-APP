@@ -6,12 +6,17 @@ import emoji
 from textblob import TextBlob
 import nltk
 
+import streamlit as st
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
 analyzer = SentimentIntensityAnalyzer()
-score = analyzer.polarity_scores(text)
 
-print(score)
+text = st.text_input("Enter your text:")
+
+if text:
+    score = analyzer.polarity_scores(text)
+    
+    st.write(score)
 
 nltk.download('punkt')
 nltk.download('stopwords')
