@@ -6,6 +6,13 @@ import emoji
 from textblob import TextBlob
 import nltk
 
+from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
+
+analyzer = SentimentIntensityAnalyzer()
+score = analyzer.polarity_scores(text)
+
+print(score)
+
 nltk.download('punkt')
 nltk.download('stopwords')
 st.title("Sentiment-Web-Analyzer")
@@ -29,16 +36,6 @@ with st.expander("Analyze Your Text"):
             st.write(emoji.emojize("Negative Speech :disappointed_face:"))
         st.write('Subjectivity', round(blob.sentiment.subjectivity,2))
 
-from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
-
-analyzer = SentimentIntensityAnalyzer()
-score = analyzer.polarity_scores(text)
-
-print(score)
-
-
-
-    
     pre = st.text_input('Clean Your Text: ')
     if pre:
         cleaned_text = clean(
