@@ -58,8 +58,20 @@ with st.expander("Analyze Your Text"):
             st.write(emoji.emojize("Negative Speech :disappointed_face:"))
         st.write('Subjectivity', round(blob.sentiment.subjectivity,2))
 
+    pre = st.text_input('Clean Your Text: ')
+    if pre:
+        cleaned_text = clean(
+            pre,
+            clean_all=False,
+            extra_spaces=True,
+            stopwords=True,
+            lowercase=True,
+            numbers=True
+        )
+        st.write(cleaned_text)
+
 ### yahan sy
-    import transformers
+import transformers
 from transformers import pipeline
 
 @st.cache_resource
@@ -99,17 +111,6 @@ if text:
     st.write(f"Subjectivity : {round(subjectivity,2)}")
 
     ### yahan tak
-    pre = st.text_input('Clean Your Text: ')
-    if pre:
-        cleaned_text = clean(
-            pre,
-            clean_all=False,
-            extra_spaces=True,
-            stopwords=True,
-            lowercase=True,
-            numbers=True
-        )
-        st.write(cleaned_text)
 
 with st.expander('Analyze Excel files'):
     st.write("_**Note**_ : Your file must contain the column Name'Tweets' that contain the text to be analyzed.")
