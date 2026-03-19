@@ -33,7 +33,33 @@ from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 #         return "Positive 😊"
 #     else:
 #         return "Neutral 😐"
-import transformers
+
+############################################
+nltk.download('punkt')
+nltk.download('stopwords')
+st.title("Sentiment-Web-Analyzer")
+background_image = '1752066186248.jpg'
+st.image(background_image, width=700)
+
+st.header("Scale Your Thoughts")
+
+with st.expander("Analyze Your Text"):
+    text = st.text_input("Text here:")
+
+    if text:
+        blob = TextBlob(text)
+        p= round(blob.sentiment.polarity,2)
+        st.write('Polarity :',p)
+        if p>=0.1:
+               st.write(emoji.emojize("Positive Speech :grinning_face_with_big_eyes:"))
+        elif p==0.0:
+            st.write(emoji.emojize("Neutral Speech :zipper-mouth_face:"))
+        else :
+            st.write(emoji.emojize("Negative Speech :disappointed_face:"))
+        st.write('Subjectivity', round(blob.sentiment.subjectivity,2))
+
+### yahan sy
+    import transformers
 from transformers import pipeline
 
 @st.cache_resource
@@ -42,6 +68,7 @@ def load_model():
 
 model = load_model()
 
+text = st.tetx("If you don't satisfy from above analyzer (optional)")
 text = st.text_input("Enter your text:")
 
 if text:
@@ -70,30 +97,8 @@ if text:
     st.write(f"Polarity : {round(polarity,2)}")
     st.write(f"{speech} Speech")
     st.write(f"Subjectivity : {round(subjectivity,2)}")
-############################################
-nltk.download('punkt')
-nltk.download('stopwords')
-st.title("Sentiment-Web-Analyzer")
-background_image = '1752066186248.jpg'
-st.image(background_image, width=700)
 
-st.header("Scale Your Thoughts")
-
-with st.expander("Analyze Your Text"):
-    text = st.text_input("Text here:")
-
-    if text:
-        blob = TextBlob(text)
-        p= round(blob.sentiment.polarity,2)
-        st.write('Polarity :',p)
-        if p>=0.1:
-               st.write(emoji.emojize("Positive Speech :grinning_face_with_big_eyes:"))
-        elif p==0.0:
-            st.write(emoji.emojize("Neutral Speech :zipper-mouth_face:"))
-        else :
-            st.write(emoji.emojize("Negative Speech :disappointed_face:"))
-        st.write('Subjectivity', round(blob.sentiment.subjectivity,2))
-
+    ### yahan tak
     pre = st.text_input('Clean Your Text: ')
     if pre:
         cleaned_text = clean(
