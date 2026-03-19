@@ -1,7 +1,7 @@
 from textblob import TextBlob
 import pandas as pd
 import streamlit as st
-import cleantext import clean
+import cleantext as clean
 import emoji
 from textblob import TextBlob
 import nltk
