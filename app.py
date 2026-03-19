@@ -68,7 +68,7 @@ def load_model():
 
 model = load_model()
 
-text = st.tetx("If you don't satisfy from above analyzer (optional)")
+st.text("If you don't satisfy from above analyzer (optional)")
 text = st.text_input("Enter your text:")
 
 if text:
