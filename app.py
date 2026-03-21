@@ -128,26 +128,133 @@ with st.expander('Analyze Excel files'):
         else:
             return 'Neutral'
 
-    if upl:
-        df = pd.read_excels(upl)
-        # del df['Unnamed: 0']
-        df['score'] = df['tweets'].apply(score)
-        df['analysis'] = df['score'].apply(analyze)
-        st.write(df.head(10))
+    # if upl:
+    #     df = pd.read_excel(upl)
+    #     # del df['Unnamed: 0']
+    #     df['score'] = df['tweets'].apply(score)
+    #     df['analysis'] = df['score'].apply(analyze)
+    #     st.write(df.head(10))
 
-        @st.cache
-        def convert_df(df):
-            # IMPORTANT: Cache the conversion to prevent computation on every rerun
-            return df.to_csv().encode('utf-8')
+    #     @st.cache
+    #     def convert_df(df):
+    #         # IMPORTANT: Cache the conversion to prevent computation on every rerun
+    #         return df.to_csv().encode('utf-8')
 
-        csv = convert_df(df)
+    #     csv = convert_df(df)
 
-        st.download_button(
-            label="Download data as CSV",
-            data=csv,
-            file_name='sentiment.csv',
-            mime='text/csv',
-        )
+    #     st.download_button(
+    #         label="Download data as CSV",
+    #         data=csv,
+    #         file_name='sentiment.csv',
+    #         mime='text/csv',
+    #     )
+    ########################################
+    import streamlit as st
+import pandas as pd
+from transformers import pipeline
+
+# -------------------------------
+# Load Model (cached)
+# -------------------------------
+@st.cache_resource
+def load_model():
+    return pipeline("sentiment-analysis")
+
+model = load_model()
+
+# -------------------------------
+# Title
+# -------------------------------
+st.title("Sentiment Analyzer Web App")
+
+# -------------------------------
+# Text Input Section
+# -------------------------------
+st.subheader("Analyze Single Text")
+
+text = st.text_input("Enter your text:")
+
+if text:
+    result = model(text)[0]
+
+    label = result['label']
+    score = result['score']
+
+    # Convert polarity
+    polarity = score if label == "POSITIVE" else -score
+    subjectivity = abs(polarity)
+
+    # Speech label
+    if polarity > 0:
+        speech = "Positive"
+        st.success("Positive Speech 😊")
+    elif polarity < 0:
+        speech = "Negative"
+        st.error("Negative Speech 😞")
+    else:
+        speech = "Neutral"
+        st.info("Neutral Speech 😐")
+
+    # Output
+    st.metric("Polarity", round(polarity, 2))
+    st.metric("Subjectivity", round(subjectivity, 2))
+    st.write(f"Speech: {speech}")
+
+# -------------------------------
+# File Upload Section
+# -------------------------------
+st.subheader("Upload File (CSV or Excel)")
+
+upl = st.file_uploader("Upload your file", type=["csv", "xlsx"])
+
+def get_sentiment(text):
+    result = model(text)[0]
+    label = result['label']
+    score = result['score']
+    return score if label == "POSITIVE" else -score
+
+def analyze(score):
+    if score > 0:
+        return "Positive"
+    elif score < 0:
+        return "Negative"
+    else:
+        return "Neutral"
+
+if upl is not None:
+    try:
+        # Read file
+        if upl.name.endswith(".csv"):
+            df = pd.read_csv(upl)
+        else:
+            df = pd.read_excel(upl)
+
+        st.write("Preview of Data:")
+        st.dataframe(df.head())
+
+        # Check column
+        if 'tweets' not in df.columns:
+            st.error("Column 'tweets' not found in file ❌")
+        else:
+            # Apply sentiment
+            df['score'] = df['tweets'].apply(get_sentiment)
+            df['analysis'] = df['score'].apply(analyze)
+
+            st.success("Analysis Completed ✅")
+            st.dataframe(df)
+
+            # Download result
+            csv = df.to_csv(index=False).encode('utf-8')
+            st.download_button(
+                "Download Results",
+                csv,
+                "sentiment_results.csv",
+                "text/csv"
+            )
+
+    except Exception as e:
+        st.error(f"Error: {e}")
+    ########################################
 st.write("\n" * 15)
 # Add a bold line above the footer
 st.markdown("<hr style='border: 2px solid black;'>", unsafe_allow_html=True)
