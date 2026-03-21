@@ -149,7 +149,6 @@ with st.expander('Analyze Excel files'):
     #         mime='text/csv',
     #     )
     ########################################
-    import streamlit as st
 import pandas as pd
 from transformers import pipeline
 
