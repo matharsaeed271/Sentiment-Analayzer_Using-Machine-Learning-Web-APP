@@ -16,3 +16,4 @@ clean-text
 vaderSentiment
 transformers
 torch
+openpyxl
