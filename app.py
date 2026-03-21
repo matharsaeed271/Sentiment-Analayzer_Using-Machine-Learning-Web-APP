@@ -149,57 +149,6 @@ with st.expander('Analyze Excel files'):
     #         mime='text/csv',
     #     )
     ########################################
-import pandas as pd
-from transformers import pipeline
-
-# -------------------------------
-# Load Model (cached)
-# -------------------------------
-@st.cache_resource
-def load_model():
-    return pipeline("sentiment-analysis")
-
-model = load_model()
-
-# -------------------------------
-# Title
-# -------------------------------
-st.title("Sentiment Analyzer Web App")
-
-# -------------------------------
-# Text Input Section
-# -------------------------------
-st.subheader("Analyze Single Text")
-
-text = st.text_input("Enter your text:")
-
-if text:
-    result = model(text)[0]
-
-    label = result['label']
-    score = result['score']
-
-    # Convert polarity
-    polarity = score if label == "POSITIVE" else -score
-    subjectivity = abs(polarity)
-
-    # Speech label
-    if polarity > 0:
-        speech = "Positive"
-        st.success("Positive Speech 😊")
-    elif polarity < 0:
-        speech = "Negative"
-        st.error("Negative Speech 😞")
-    else:
-        speech = "Neutral"
-        st.info("Neutral Speech 😐")
-
-    # Output
-    st.metric("Polarity", round(polarity, 2))
-    st.metric("Subjectivity", round(subjectivity, 2))
-    st.write(f"Speech: {speech}")
-
-# -------------------------------
 # File Upload Section
 # -------------------------------
 st.subheader("Upload File (CSV or Excel)")
