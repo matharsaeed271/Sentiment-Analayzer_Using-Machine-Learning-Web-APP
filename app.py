@@ -69,8 +69,8 @@ with st.expander("Analyze Your Text"):
             numbers=True
         )
         # st.write(cleaned_text)
-         # Spell Correction
-         corrected = str(TextBlob(cleaned_text).correct())
+        # Spell Correction
+        corrected = str(TextBlob(cleaned_text).correct())
         st.write("Cleaned Text:", cleaned_text)
         st.write("Corrected Text:", corrected)        
 
