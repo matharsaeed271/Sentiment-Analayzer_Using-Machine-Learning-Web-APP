@@ -117,7 +117,7 @@ if text:
     ### yahan tak
 
 # with st.expander('Analyze Excel files'):
-#     st.write("_**Note**_ : Your file must contain the column Name'Tweets' that contain the text to be analyzed.")
+#     st.write("_**Note**_ : Your file must contain the column Name'tweets' that contain the text to be analyzed.")
 #     upl = st.file_uploader('Upload file')
 
 #     def score(x):
