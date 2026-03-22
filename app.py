@@ -120,13 +120,13 @@ with st.expander('Analyze Excel files'):
         blob1 = TextBlob(x)
         return blob1.sentiment.polarity
 
-    def analyze(x):
-        if x >= 0.5:
-            return 'Positive'
-        elif x <= -0.5:
-            return 'Negative'
-        else:
-            return 'Neutral'
+    # def analyze(x):
+    #     if x >= 0.5:
+    #         return 'Positive'
+    #     elif x <= -0.5:
+    #         return 'Negative'
+    #     else:
+    #         return 'Neutral'
 
     # if upl:
     #     df = pd.read_excel(upl)
@@ -151,6 +151,9 @@ with st.expander('Analyze Excel files'):
     ########################################
 # File Upload Section
 # -------------------------------
+with st.expander('Analyze Excel files'):
+    st.write("_**Note**_ : Your file must contain the column Name'Tweets' that contain the text to be analyzed.")
+    upl = st.file_uploader('Upload file')
 st.subheader("Upload File (CSV or Excel)")
 
 upl = st.file_uploader("Upload your file", type=["csv", "xlsx"])
