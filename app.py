@@ -68,7 +68,11 @@ with st.expander("Analyze Your Text"):
             lowercase=True,
             numbers=True
         )
-        st.write(cleaned_text)
+        # st.write(cleaned_text)
+         # Spell Correction
+         corrected = str(TextBlob(cleaned_text).correct())
+        st.write("Cleaned Text:", cleaned_text)
+        st.write("Corrected Text:", corrected)        
 
 ### yahan sy
 import transformers
