@@ -155,7 +155,7 @@ with st.expander('Analyze Excel files'):
     st.write("_**Note**_ : Your file must contain the column Name'Tweets' that contain the text to be analyzed.")
     # upl = st.file_uploader('Upload file')
 
-        def score(x):
+    def score(x):
         blob1 = TextBlob(x)
         return blob1.sentiment.polarity
             
