@@ -65,7 +65,7 @@ with st.expander("Analyze Your Text"):
             clean_all=False,
             extra_spaces=True,
             stopwords=True,
-            # lowercase=True,
+            lowercases=True,
             numbers=True
         )
         # st.write(cleaned_text)
