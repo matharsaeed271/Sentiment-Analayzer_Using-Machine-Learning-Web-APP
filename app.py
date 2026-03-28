@@ -60,13 +60,28 @@ with st.expander("Analyze Your Text"):
 
     pre = st.text_input('Clean Your Text: ')
     if pre:
+        # cleaned_text = clean(
+        #     pre,
+        #     clean_all=False,
+        #     extra_spaces=True,
+        #     stopwords=True,
+        #     lower=True,
+        #     numbers=True
+        # )
         cleaned_text = clean(
             pre,
-            clean_all=False,
-            extra_spaces=True,
-            stopwords=True,
+            fix_unicode=True,
+            to_ascii=True,
             lower=True,
-            numbers=True
+            no_line_breaks=True,
+            no_urls=True,
+            no_emails=True,
+            no_phone_numbers=True,
+            no_numbers=True,
+            no_digits=True,
+            no_currency_symbols=True,
+            no_punct=True,
+            replace_with_punct="",
         )
         # st.write(cleaned_text)
         # Spell Correction
