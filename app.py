@@ -65,8 +65,8 @@ with st.expander("Analyze Your Text"):
             clean_all=False,
             extra_spaces=True,
             stopwords=True,
-            lowercase=True,
-            numbers=True,
+            # lowercase=True,
+            numbers=True
         )
         # st.write(cleaned_text)
         # Spell Correction
