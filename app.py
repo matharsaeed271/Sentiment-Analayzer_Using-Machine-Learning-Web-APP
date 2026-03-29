@@ -106,13 +106,15 @@ if pre:
     cleaned_text = clean_text(pre)
     # st.write("Cleaned Text:", cleaned_text)
     corrected = str(TextBlob(cleaned_text).correct())
+    st.write("Cleaned Text:", cleaned_text)
+    st.write("Corrected Text:", corrected)   
 ###########################################--------------------
-# cleaned_text = clean_text(pre)
-#      # st.write(cleaned_text)
-#     # Spell Correction
-#     corrected = str(TextBlob(cleaned_text).correct())
-#     st.write("Cleaned Text:", cleaned_text)
-#     st.write("Corrected Text:", corrected)        
+cleaned_text = clean_text(pre)
+     # st.write(cleaned_text)
+    # Spell Correction
+    corrected = str(TextBlob(cleaned_text).correct())
+    st.write("Cleaned Text:", cleaned_text)
+    st.write("Corrected Text:", corrected)        
 
 ### yahan sy
 import transformers
