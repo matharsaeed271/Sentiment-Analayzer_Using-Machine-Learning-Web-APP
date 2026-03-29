@@ -57,7 +57,19 @@ with st.expander("Analyze Your Text"):
         else :
             st.write(emoji.emojize("Negative Speech :disappointed_face:"))
         st.write('Subjectivity', round(blob.sentiment.subjectivity,2))
+        
+import re
+import streamlit as st
 
+# function hamesha upar define karo
+def clean_text(text):
+    text = text.lower()
+    text = re.sub(r"http\S+", "", text)   # remove URLs
+    text = re.sub(r"\S+@\S+", "", text)   # remove emails
+    text = re.sub(r"\d+", "", text)       # remove numbers
+    text = re.sub(r"[^\w\s]", "", text)   # remove punctuation
+    text = re.sub(r"\s+", " ", text).strip()  # remove extra spaces
+    return text
     # input
     pre = st.text_input('Clean Your Text: ')
     
@@ -96,18 +108,18 @@ with st.expander("Analyze Your Text"):
         #     )
         # import re
 ###########################################--------------------
-import re
-import streamlit as st
+# import re
+# import streamlit as st
 
-# function hamesha upar define karo
-def clean_text(text):
-    text = text.lower()
-    text = re.sub(r"http\S+", "", text)   # remove URLs
-    text = re.sub(r"\S+@\S+", "", text)   # remove emails
-    text = re.sub(r"\d+", "", text)       # remove numbers
-    text = re.sub(r"[^\w\s]", "", text)   # remove punctuation
-    text = re.sub(r"\s+", " ", text).strip()  # remove extra spaces
-    return text
+# # function hamesha upar define karo
+# def clean_text(text):
+#     text = text.lower()
+#     text = re.sub(r"http\S+", "", text)   # remove URLs
+#     text = re.sub(r"\S+@\S+", "", text)   # remove emails
+#     text = re.sub(r"\d+", "", text)       # remove numbers
+#     text = re.sub(r"[^\w\s]", "", text)   # remove punctuation
+#     text = re.sub(r"\s+", " ", text).strip()  # remove extra spaces
+#     return text
 
 # # input
 # pre = st.text_input('Clean Your Text: ')
