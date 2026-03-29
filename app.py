@@ -52,23 +52,21 @@ def clean_text(text):
     return text
 with st.expander("Analyze Your Text"):
     text = st.text_input("Text here:")
-    pre = st.text_input("Clean Your Text:")
 
-    if st.button("Process Text", key="process_text"):
-        if text:
-            blob = TextBlob(text)
-            p= round(blob.sentiment.polarity,2)
-            st.write('Polarity :',p)
-            if p>=0.1:
-                   st.write(emoji.emojize("Positive Speech :grinning_face_with_big_eyes:"))
-            elif p==0.0:
-                st.write(emoji.emojize("Neutral Speech :zipper-mouth_face:"))
-            else :
-                st.write(emoji.emojize("Negative Speech :disappointed_face:"))
+    if text:
+        blob = TextBlob(text)
+        p= round(blob.sentiment.polarity,2)
+        st.write('Polarity :',p)
+         if p>=0.1:
+            st.write(emoji.emojize("Positive Speech :grinning_face_with_big_eyes:"))
+        elif p==0.0:
+            st.write(emoji.emojize("Neutral Speech :zipper-mouth_face:"))
+        else :
+            st.write(emoji.emojize("Negative Speech :disappointed_face:"))
             st.write('Subjectivity', round(blob.sentiment.subjectivity,2))
             
     # # input
-    # pre = st.text_input('Clean Your Text: ')
+    pre = st.text_input('Clean Your Text: ')
     
     # apply cleaning
     if pre:
