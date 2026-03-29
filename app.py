@@ -63,7 +63,8 @@ with st.expander("Analyze Your Text"):
             st.write(emoji.emojize("Neutral Speech :zipper-mouth_face:"))
         else :
             st.write(emoji.emojize("Negative Speech :disappointed_face:"))
-            st.write('Subjectivity', round(blob.sentiment.subjectivity,2))
+            
+        st.write('Subjectivity', round(blob.sentiment.subjectivity,2))
             
     # # input
     pre = st.text_input('Clean Your Text: ')
