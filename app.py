@@ -53,7 +53,7 @@ def clean_text(text):
 with st.expander("Analyze Your Text"):
     text = st.text_input("Text here:")
 
-    if text and st.button("Process Text"):
+    if text:
         blob = TextBlob(text)
         p= round(blob.sentiment.polarity,2)
         st.write('Polarity :',p)
@@ -64,7 +64,7 @@ with st.expander("Analyze Your Text"):
         else :
             st.write(emoji.emojize("Negative Speech :disappointed_face:"))
         st.write('Subjectivity', round(blob.sentiment.subjectivity,2))
-        
+    st.button("Process Text") 
     # input
     pre = st.text_input('Clean Your Text: ')
     
@@ -75,7 +75,7 @@ with st.expander("Analyze Your Text"):
         corrected = str(TextBlob(cleaned_text).correct())
         st.write("Cleaned Text:", cleaned_text)
         st.write("Corrected Text:", corrected)        
-
+    st.button("Process Text") 
 ### yahan sy
 import transformers
 from transformers import pipeline
