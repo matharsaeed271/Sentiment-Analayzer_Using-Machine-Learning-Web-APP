@@ -57,7 +57,7 @@ with st.expander("Analyze Your Text"):
         blob = TextBlob(text)
         p= round(blob.sentiment.polarity,2)
         st.write('Polarity :',p)
-         if p>=0.1:
+        if p>=0.1:
             st.write(emoji.emojize("Positive Speech :grinning_face_with_big_eyes:"))
         elif p==0.0:
             st.write(emoji.emojize("Neutral Speech :zipper-mouth_face:"))
