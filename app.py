@@ -53,7 +53,7 @@ def clean_text(text):
 with st.expander("Analyze Your Text"):
     text = st.text_input("Text here:")
 
-    if text:
+    if text and st.button("Process Text")::
         blob = TextBlob(text)
         p= round(blob.sentiment.polarity,2)
         st.write('Polarity :',p)
@@ -69,73 +69,12 @@ with st.expander("Analyze Your Text"):
     pre = st.text_input('Clean Your Text: ')
     
     # apply cleaning
-    if pre  and st.button("Process Text"):
+    if pre:
         cleaned_text = clean_text(pre)
         # st.write("Cleaned Text:", cleaned_text)
         corrected = str(TextBlob(cleaned_text).correct())
         st.write("Cleaned Text:", cleaned_text)
-        st.write("Corrected Text:", corrected)  
-
-
-# function hamesha upar define karo
-
-    # pre = st.text_input('Clean Your Text: ')
-    # if pre:
-        # cleaned_text = clean(
-        #     pre,
-        #     clean_all=False,
-        #     extra_spaces=True,
-        #     stopwords=True,
-        #     lower=True,
-        #     numbers=True
-        # )
-        # cleaned_text = clean(
-        #     pre,
-        #     fix_unicode=True,
-        #     to_ascii=True,
-        #     lower=True,
-        #     no_line_breaks=True,
-        #     no_urls=True,
-        #     no_emails=True,
-        #     no_phone_numbers=True,
-        #     no_numbers=True,
-        #     no_digits=True,
-        #     no_currency_symbols=True,
-        #     no_punct=True
-        #     # replace_with_punct="",
-        #     )
-        # import re
-###########################################--------------------
-# import re
-# import streamlit as st
-
-# # function hamesha upar define karo
-# def clean_text(text):
-#     text = text.lower()
-#     text = re.sub(r"http\S+", "", text)   # remove URLs
-#     text = re.sub(r"\S+@\S+", "", text)   # remove emails
-#     text = re.sub(r"\d+", "", text)       # remove numbers
-#     text = re.sub(r"[^\w\s]", "", text)   # remove punctuation
-#     text = re.sub(r"\s+", " ", text).strip()  # remove extra spaces
-#     return text
-
-# # input
-# pre = st.text_input('Clean Your Text: ')
-
-# # apply cleaning
-# if pre  and st.button("Process Text"):
-#     cleaned_text = clean_text(pre)
-#     # st.write("Cleaned Text:", cleaned_text)
-#     corrected = str(TextBlob(cleaned_text).correct())
-#     st.write("Cleaned Text:", cleaned_text)
-#     st.write("Corrected Text:", corrected)   
-###########################################--------------------
-# cleaned_text = clean_text(pre)
-#      # st.write(cleaned_text)
-#     # Spell Correction
-#     corrected = str(TextBlob(cleaned_text).correct())
-#     st.write("Cleaned Text:", cleaned_text)
-#     st.write("Corrected Text:", corrected)        
+        st.write("Corrected Text:", corrected)        
 
 ### yahan sy
 import transformers
