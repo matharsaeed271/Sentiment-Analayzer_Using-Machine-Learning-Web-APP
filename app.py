@@ -53,7 +53,7 @@ def clean_text(text):
 with st.expander("Analyze Your Text"):
     text = st.text_input("Text here:")
 
-    if text and st.button("Process Text")::
+    if text and st.button("Process Text"):
         blob = TextBlob(text)
         p= round(blob.sentiment.polarity,2)
         st.write('Polarity :',p)
