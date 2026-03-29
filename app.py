@@ -64,7 +64,7 @@ with st.expander("Analyze Your Text"):
         else :
             st.write(emoji.emojize("Negative Speech :disappointed_face:"))
         st.write('Subjectivity', round(blob.sentiment.subjectivity,2))
-    st.button("Process Text") 
+        
     # input
     pre = st.text_input('Clean Your Text: ')
     
