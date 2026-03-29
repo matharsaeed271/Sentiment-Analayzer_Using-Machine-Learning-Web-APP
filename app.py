@@ -102,7 +102,7 @@ def clean_text(text):
 pre = st.text_input('Clean Your Text: ')
 
 # apply cleaning
-if pre:
+if pre  and st.button("Process Text"):
     cleaned_text = clean_text(pre)
     # st.write("Cleaned Text:", cleaned_text)
     corrected = str(TextBlob(cleaned_text).correct())
