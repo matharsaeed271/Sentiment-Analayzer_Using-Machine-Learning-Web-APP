@@ -58,6 +58,16 @@ with st.expander("Analyze Your Text"):
             st.write(emoji.emojize("Negative Speech :disappointed_face:"))
         st.write('Subjectivity', round(blob.sentiment.subjectivity,2))
         
+    # input
+    pre = st.text_input('Clean Your Text: ')
+    
+    # apply cleaning
+    if pre  and st.button("Process Text"):
+        cleaned_text = clean_text(pre)
+        # st.write("Cleaned Text:", cleaned_text)
+        corrected = str(TextBlob(cleaned_text).correct())
+        st.write("Cleaned Text:", cleaned_text)
+        st.write("Corrected Text:", corrected)  
 import re
 import streamlit as st
 
@@ -70,17 +80,6 @@ def clean_text(text):
     text = re.sub(r"[^\w\s]", "", text)   # remove punctuation
     text = re.sub(r"\s+", " ", text).strip()  # remove extra spaces
     return text
-    # input
-    pre = st.text_input('Clean Your Text: ')
-    
-    # apply cleaning
-    if pre  and st.button("Process Text"):
-        cleaned_text = clean_text(pre)
-        # st.write("Cleaned Text:", cleaned_text)
-        corrected = str(TextBlob(cleaned_text).correct())
-        st.write("Cleaned Text:", cleaned_text)
-        st.write("Corrected Text:", corrected)  
-    
     # pre = st.text_input('Clean Your Text: ')
     # if pre:
         # cleaned_text = clean(
