@@ -77,7 +77,7 @@ with st.expander("Analyze Your Text"):
         corrected = str(TextBlob(cleaned_text).correct())
         st.write("Cleaned Text:", cleaned_text)
         st.write("Corrected Text:", corrected)        
-    st.button("Process Text") 
+        
 ### yahan sy
 import transformers
 from transformers import pipeline
