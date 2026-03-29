@@ -5,7 +5,7 @@ from cleantext import clean
 import emoji
 from textblob import TextBlob
 import nltk
-
+import re
 import streamlit as st
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 #################################
@@ -42,7 +42,14 @@ background_image = '1752066186248.jpg'
 st.image(background_image, width=700)
 
 st.header("Scale Your Thoughts")
-
+def clean_text(text):
+    text = text.lower()
+    text = re.sub(r"http\S+", "", text)   # remove URLs
+    text = re.sub(r"\S+@\S+", "", text)   # remove emails
+    text = re.sub(r"\d+", "", text)       # remove numbers
+    text = re.sub(r"[^\w\s]", "", text)   # remove punctuation
+    text = re.sub(r"\s+", " ", text).strip()  # remove extra spaces
+    return text
 with st.expander("Analyze Your Text"):
     text = st.text_input("Text here:")
 
@@ -68,18 +75,10 @@ with st.expander("Analyze Your Text"):
         corrected = str(TextBlob(cleaned_text).correct())
         st.write("Cleaned Text:", cleaned_text)
         st.write("Corrected Text:", corrected)  
-import re
-import streamlit as st
+
 
 # function hamesha upar define karo
-def clean_text(text):
-    text = text.lower()
-    text = re.sub(r"http\S+", "", text)   # remove URLs
-    text = re.sub(r"\S+@\S+", "", text)   # remove emails
-    text = re.sub(r"\d+", "", text)       # remove numbers
-    text = re.sub(r"[^\w\s]", "", text)   # remove punctuation
-    text = re.sub(r"\s+", " ", text).strip()  # remove extra spaces
-    return text
+
     # pre = st.text_input('Clean Your Text: ')
     # if pre:
         # cleaned_text = clean(
