@@ -58,8 +58,8 @@ with st.expander("Analyze Your Text"):
             st.write(emoji.emojize("Negative Speech :disappointed_face:"))
         st.write('Subjectivity', round(blob.sentiment.subjectivity,2))
 
-    pre = st.text_input('Clean Your Text: ')
-    if pre:
+    # pre = st.text_input('Clean Your Text: ')
+    # if pre:
         # cleaned_text = clean(
         #     pre,
         #     clean_all=False,
@@ -68,21 +68,45 @@ with st.expander("Analyze Your Text"):
         #     lower=True,
         #     numbers=True
         # )
-        cleaned_text = clean(
-            pre,
-            fix_unicode=True,
-            to_ascii=True,
-            lower=True,
-            no_line_breaks=True,
-            no_urls=True,
-            no_emails=True,
-            no_phone_numbers=True,
-            no_numbers=True,
-            no_digits=True,
-            no_currency_symbols=True,
-            no_punct=True
-            # replace_with_punct="",
-            )
+        # cleaned_text = clean(
+        #     pre,
+        #     fix_unicode=True,
+        #     to_ascii=True,
+        #     lower=True,
+        #     no_line_breaks=True,
+        #     no_urls=True,
+        #     no_emails=True,
+        #     no_phone_numbers=True,
+        #     no_numbers=True,
+        #     no_digits=True,
+        #     no_currency_symbols=True,
+        #     no_punct=True
+        #     # replace_with_punct="",
+        #     )
+        # import re
+###########################################--------------------
+import re
+import streamlit as st
+
+# function hamesha upar define karo
+def clean_text(text):
+    text = text.lower()
+    text = re.sub(r"http\S+", "", text)   # remove URLs
+    text = re.sub(r"\S+@\S+", "", text)   # remove emails
+    text = re.sub(r"\d+", "", text)       # remove numbers
+    text = re.sub(r"[^\w\s]", "", text)   # remove punctuation
+    text = re.sub(r"\s+", " ", text).strip()  # remove extra spaces
+    return text
+
+# input
+pre = st.text_input('Clean Your Text: ')
+
+# apply cleaning
+if pre:
+    cleaned_text = clean_text(pre)
+    st.write("Cleaned Text:", cleaned_text)
+###########################################--------------------
+cleaned_text = clean_text(pre)
         # st.write(cleaned_text)
         # Spell Correction
         corrected = str(TextBlob(cleaned_text).correct())
