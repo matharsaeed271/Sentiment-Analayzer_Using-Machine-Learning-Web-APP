@@ -159,7 +159,7 @@ if text:
 # File Upload Section
 # -------------------------------
 with st.expander('Analyze Excel files'):
-    st.write("_**Note**_ : Your file must contain the column Name'Tweets' that contain the text to be analyzed.")
+    st.write("_**Note**_ : Your file must contain the column Name'tweets' that contain the text to be analyzed.")
     # upl = st.file_uploader('Upload file')
     upl = st.file_uploader("Upload your file", type=["csv", "xlsx"])
     def score(x):
